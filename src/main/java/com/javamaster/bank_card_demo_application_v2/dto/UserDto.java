@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,6 +39,11 @@ public class UserDto {
     @Size(min = 1, max = 15)
     @NotBlank(message = "Patronymic must be specified")
     private String patronymic;
+
+    @Schema(description = "Phone number")
+    @Size(min = 1, max = 15)
+    @NotNull(message = "Phone number must be specified")
+    private Integer phoneNumber;
 
     @Schema(description = "E-mail")
     @Email(message = "E-mail wrong format")

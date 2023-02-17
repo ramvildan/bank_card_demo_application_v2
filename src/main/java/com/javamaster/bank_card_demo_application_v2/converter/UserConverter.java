@@ -16,6 +16,7 @@ public class UserConverter {
                 .name(userDto.getName())
                 .surname(userDto.getSurname())
                 .patronymic(userDto.getPatronymic())
+                .phoneNumber(userDto.getPhoneNumber())
                 .email(userDto.getEmail())
                 .status(userDto.getStatus())
                 .build();
@@ -30,6 +31,7 @@ public class UserConverter {
                 .name(user.getName())
                 .surname(user.getSurname())
                 .patronymic(user.getPatronymic())
+                .phoneNumber(user.getPhoneNumber())
                 .email(user.getEmail())
                 .status(user.getStatus())
                 .build();

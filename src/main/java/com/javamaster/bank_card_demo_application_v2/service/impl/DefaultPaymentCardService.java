@@ -15,22 +15,21 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class DefaultPaymentCardService implements PaymentCardService {
 
-    private final UserRepository userRepository;
-
     private final PaymentCardRepository paymentCardRepository;
 
     private final PaymentCardConverter paymentCardConverter;
 
     @Override
     public PaymentCardDto createPaymentCard(Integer userId, @Valid PaymentCardDto paymentCardDto) {
-        User userWithAddedCard = userRepository.findUserById(userId);
+
         PaymentCard newPaymentCard = PaymentCard.builder()
                 .id(paymentCardDto.getId())
                 .cardNumber(paymentCardDto.getCardNumber())
                 .cardType(paymentCardDto.getCardType())
                 .currencyType(paymentCardDto.getCurrencyType())
-                .user(userWithAddedCard)
+                .user_id(userId)
                 .build();
+
         return paymentCardConverter.fromPaymentCardToPaymentCardDto(
                 paymentCardRepository.save(newPaymentCard)
         );

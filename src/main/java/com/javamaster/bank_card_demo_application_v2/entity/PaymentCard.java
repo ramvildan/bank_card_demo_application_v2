@@ -15,6 +15,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.List;
+
 @Entity
 @Table(name = "card_table")
 @Data
@@ -36,7 +38,6 @@ public class PaymentCard {
     @Column(name = "Card Type", nullable = false)
     private CardType cardType;
 
-    @ToString.Exclude
-    @OneToOne
-    private User user;
+    @Column(nullable = false)
+    private Integer user_id;
 }

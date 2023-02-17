@@ -33,11 +33,16 @@ public class User {
     @Column(name = "Patronymic", nullable = false)
     private String patronymic;
 
+    @Column(name = "Phone_number", nullable = false)
+    private Integer phoneNumber;
+
     @Column(name = "E-mail", nullable = false)
     private String email;
 
     @Column(name = "Status", nullable = false)
     private CardType status;
+
+    private PaymentCard paymentCard;
 
 }
 
