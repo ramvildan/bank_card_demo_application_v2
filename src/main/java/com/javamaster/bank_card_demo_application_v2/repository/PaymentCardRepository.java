@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PaymentCardRepository extends JpaRepository<PaymentCard, Integer> {
 
-    PaymentCard findPaymentCardByUser_id(Integer userId);
+    PaymentCard findPaymentCardByUserId(Integer userId);
 }

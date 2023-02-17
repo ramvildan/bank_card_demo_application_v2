@@ -42,7 +42,5 @@ public class User {
     @Column(name = "Status", nullable = false)
     private CardType status;
 
-    private PaymentCard paymentCard;
-
 }
 

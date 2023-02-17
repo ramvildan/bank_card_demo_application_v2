@@ -39,5 +39,5 @@ public class PaymentCard {
     private CardType cardType;
 
     @Column(nullable = false)
-    private Integer user_id;
+    private Integer userId;
 }

@@ -49,8 +49,10 @@ public class UserDto {
     @Email(message = "E-mail wrong format")
     private String email;
 
+    @NotNull
     private PaymentCardDto paymentCardDto;
 
+    @NotNull
     private CardType status;
 
 }

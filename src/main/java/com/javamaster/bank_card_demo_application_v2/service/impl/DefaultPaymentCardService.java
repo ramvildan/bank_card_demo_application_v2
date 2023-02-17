@@ -27,7 +27,7 @@ public class DefaultPaymentCardService implements PaymentCardService {
                 .cardNumber(paymentCardDto.getCardNumber())
                 .cardType(paymentCardDto.getCardType())
                 .currencyType(paymentCardDto.getCurrencyType())
-                .user_id(userId)
+                .userId(userId)
                 .build();
 
         return paymentCardConverter.fromPaymentCardToPaymentCardDto(

@@ -30,7 +30,9 @@ public class PaymentCardDto {
     @NotNull(message = "Card number must be specified")
     private Integer cardNumber;
 
+    @NotNull
     private CardType cardType;
 
+    @NotNull
     private CurrencyType currencyType;
 }
