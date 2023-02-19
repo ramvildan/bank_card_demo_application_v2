@@ -1,8 +1,10 @@
 package com.javamaster.bank_card_demo_application_v2.controller;
 
+import com.javamaster.bank_card_demo_application_v2.dto.PaymentCardCreateDto;
 import com.javamaster.bank_card_demo_application_v2.dto.PaymentCardDto;
 import com.javamaster.bank_card_demo_application_v2.service.PaymentCardService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,8 +24,8 @@ public class PaymentCardController {
 
     @PostMapping("/{userId}")
     public PaymentCardDto createPaymentCard(@PathVariable Integer userId,
-                                            @RequestBody PaymentCardDto paymentCardDto) {
-        log.info("createPaymentCard: userId = {}, paymentCardDto = {}", userId, paymentCardDto);
-        return paymentCardService.createPaymentCard(userId, paymentCardDto);
+                                            @RequestBody @Valid PaymentCardCreateDto paymentCardCreateDto) {
+        log.info("createPaymentCard: userId = {}, createPaymentCardDto = {}", userId, paymentCardCreateDto);
+        return paymentCardService.createPaymentCard(userId, paymentCardCreateDto);
     }
 }

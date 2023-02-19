@@ -1,11 +1,12 @@
 package com.javamaster.bank_card_demo_application_v2.controller;
 
-import com.javamaster.bank_card_demo_application_v2.dto.CreateUserDto;
+import com.javamaster.bank_card_demo_application_v2.dto.UserCreateDto;
 import com.javamaster.bank_card_demo_application_v2.dto.UserDto;
 import com.javamaster.bank_card_demo_application_v2.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,10 +26,10 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    @Operation(summary = "Save new user")
-    public UserDto createUser(@RequestBody CreateUserDto createUserDto) {
-        log.info("saveUser: createUserDto = {}", createUserDto);
-        return userService.createUser(createUserDto);
+    @Operation(summary = "Create new user")
+    public UserDto createUser(@RequestBody @Valid UserCreateDto userCreateDto) {
+        log.info("saveUser: createUserDto = {}", userCreateDto);
+        return userService.createUser(userCreateDto);
     }
 
     @DeleteMapping("/{userId}")

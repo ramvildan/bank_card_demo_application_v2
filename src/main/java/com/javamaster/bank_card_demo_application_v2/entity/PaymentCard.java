@@ -29,13 +29,13 @@ public class PaymentCard {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "Card Number", nullable = false)
+    @Column(name = "card_number", nullable = false)
     private Integer cardNumber;
 
-    @Column(name = "Currency Type", nullable = false)
+    @Column(name = "currency_type", nullable = false)
     private CurrencyType currencyType;
 
-    @Column(name = "Card Type", nullable = false)
+    @Column(name = "card_type", nullable = false)
     private CardType cardType;
 
     @Column(nullable = false)

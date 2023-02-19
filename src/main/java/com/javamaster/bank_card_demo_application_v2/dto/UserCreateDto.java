@@ -17,12 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Schema(description = "Create user Dto")
-public class CreateUserDto {
-
-    @Schema(description = "User Id")
-    @Min(1)
-    @Max(99999999)
-    private Integer id;
+public class UserCreateDto {
 
     @Schema(description = "Name")
     @Size(min = 1, max = 255)
@@ -40,7 +35,8 @@ public class CreateUserDto {
     private String patronymic;
 
     @Schema(description = "Phone number")
-    @Size(min = 1, max = 255)
+    @Min(1)
+    @Max(999999999)
     @NotNull(message = "Phone number must be specified")
     private Integer phoneNumber;
 

@@ -10,7 +10,7 @@ import static java.util.Objects.isNull;
 @Component
 public class UserConverter {
 
-    public User fromUserDtoToUser(@Valid UserDto userDto) {
+    public User fromUserDtoToUser(UserDto userDto) {
         return User.builder()
                 .id(userDto.getId())
                 .name(userDto.getName())
@@ -33,7 +33,6 @@ public class UserConverter {
                 .patronymic(user.getPatronymic())
                 .phoneNumber(user.getPhoneNumber())
                 .email(user.getEmail())
-                .status(user.getStatus())
                 .build();
     }
 }
