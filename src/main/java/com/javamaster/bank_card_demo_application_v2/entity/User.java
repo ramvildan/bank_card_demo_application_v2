@@ -1,6 +1,7 @@
 package com.javamaster.bank_card_demo_application_v2.entity;
 
 import com.javamaster.bank_card_demo_application_v2.entity.type.CardType;
+import com.javamaster.bank_card_demo_application_v2.entity.type.CurrencyType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,6 +12,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Date;
 
 @Entity
 @Table(name = "user_table")
@@ -41,6 +44,15 @@ public class User {
 
     @Column(name = "Status")
     private CardType status;
+
+    @Column(name = "Currency_type")
+    private CurrencyType currencyType;
+
+    private Date createdAt;
+
+    private Date updatedAt;
+
+    private boolean isDeleted;
 
 }
 

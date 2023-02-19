@@ -3,7 +3,9 @@ package com.javamaster.bank_card_demo_application_v2.service.impl;
 import com.javamaster.bank_card_demo_application_v2.converter.UserConverter;
 import com.javamaster.bank_card_demo_application_v2.dto.UserCreateDto;
 import com.javamaster.bank_card_demo_application_v2.dto.UserDto;
+import com.javamaster.bank_card_demo_application_v2.entity.PhoneNumber;
 import com.javamaster.bank_card_demo_application_v2.entity.User;
+import com.javamaster.bank_card_demo_application_v2.repository.PhoneNumberRepository;
 import com.javamaster.bank_card_demo_application_v2.repository.UserRepository;
 import com.javamaster.bank_card_demo_application_v2.service.UserService;
 import jakarta.validation.Valid;
@@ -35,6 +37,6 @@ public class DefaultUserService implements UserService {
 
     @Override
     public void deleteUser(Integer userId) {
-        userRepository.deleteById(userId);
+        userRepository.findUserById(userId).setDeleted(true);
     }
 }

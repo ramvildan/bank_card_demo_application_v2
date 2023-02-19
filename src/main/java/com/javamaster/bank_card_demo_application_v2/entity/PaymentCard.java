@@ -7,15 +7,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
-import java.util.List;
+import java.util.Date;
 
 @Entity
 @Table(name = "card_table")
@@ -40,4 +38,10 @@ public class PaymentCard {
 
     @Column(nullable = false)
     private Integer userId;
+
+    private Date createdAt;
+
+    private Date updatedAt;
+
+    private boolean isDeleted;
 }
