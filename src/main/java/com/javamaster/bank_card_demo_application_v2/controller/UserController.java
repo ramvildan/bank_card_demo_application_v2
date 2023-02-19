@@ -1,5 +1,6 @@
 package com.javamaster.bank_card_demo_application_v2.controller;
 
+import com.javamaster.bank_card_demo_application_v2.dto.CreateUserDto;
 import com.javamaster.bank_card_demo_application_v2.dto.UserDto;
 import com.javamaster.bank_card_demo_application_v2.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -25,9 +26,9 @@ public class UserController {
 
     @PostMapping
     @Operation(summary = "Save new user")
-    public UserDto saveUser(@RequestBody UserDto userDto) {
-        log.info("saveUser: userDto = {}", userDto);
-        return userService.saveUser(userDto);
+    public UserDto createUser(@RequestBody CreateUserDto createUserDto) {
+        log.info("saveUser: createUserDto = {}", createUserDto);
+        return userService.createUser(createUserDto);
     }
 
     @DeleteMapping("/{userId}")

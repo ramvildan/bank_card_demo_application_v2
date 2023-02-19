@@ -23,7 +23,7 @@ public class PaymentCardController {
     @PostMapping("/{userId}")
     public PaymentCardDto createPaymentCard(@PathVariable Integer userId,
                                             @RequestBody PaymentCardDto paymentCardDto) {
-        log.info("createPaymentCard: userId = {}, PaymentCardDto = {}", userId, paymentCardDto);
+        log.info("createPaymentCard: userId = {}, paymentCardDto = {}", userId, paymentCardDto);
         return paymentCardService.createPaymentCard(userId, paymentCardDto);
     }
 }
