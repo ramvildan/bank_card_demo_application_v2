@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user")
 @RequiredArgsConstructor
 @Log4j2
-@Tag(name = "User", description = "All methods for working with user")
+@Tag(name = "User", description = "All methods to work with user")
 public class UserController {
 
     private final UserService userService;

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/payment_card")
 @RequiredArgsConstructor
 @Log4j2
-@Tag(name = "Payment card", description = "All methods for working with Payment card")
+@Tag(name = "Payment card", description = "All methods to work with Payment card")
 public class PaymentCardController {
 
     private final PaymentCardService paymentCardService;

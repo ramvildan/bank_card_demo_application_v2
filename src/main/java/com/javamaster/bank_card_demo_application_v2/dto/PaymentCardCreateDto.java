@@ -3,6 +3,8 @@ package com.javamaster.bank_card_demo_application_v2.dto;
 import com.javamaster.bank_card_demo_application_v2.entity.type.CardType;
 import com.javamaster.bank_card_demo_application_v2.entity.type.CurrencyType;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -18,7 +20,8 @@ import lombok.NoArgsConstructor;
 public class PaymentCardCreateDto {
 
     @Schema(description = "Card number")
-    @Size(min = 1, max = 20)
+    @Min(1)
+    @Max(999999999)
     @NotNull(message = "Card number must be specified")
     private Integer cardNumber;
 
