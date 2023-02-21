@@ -28,7 +28,7 @@ public class PaymentCard {
     private Integer id;
 
     @Column(name = "card_number", nullable = false)
-    private Integer cardNumber;
+    private String cardNumber;
 
     @Column(name = "currency_type", nullable = false)
     private CurrencyType currencyType;
@@ -36,7 +36,7 @@ public class PaymentCard {
     @Column(name = "card_type", nullable = false)
     private CardType cardType;
 
-    @Column(nullable = false)
+    @Column(name = "user_id", nullable = false)
     private Integer userId;
 
     private Date createdAt;

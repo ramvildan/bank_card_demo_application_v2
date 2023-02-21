@@ -15,7 +15,7 @@ import java.util.List;
 @Schema(description = "Page response")
 public class PhoneNumberResponseDto {
 
-    private List<Integer> phoneNumbers;
+    private List<String> phoneNumbers;
     private int size;
     private int count;
     private int page;

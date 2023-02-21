@@ -37,7 +37,7 @@ public class User {
     private String patronymic;
 
     @Column(name = "Phone_number", nullable = false)
-    private Integer phoneNumber;
+    private String phoneNumber;
 
     @Column(name = "E-mail", nullable = false)
     private String email;

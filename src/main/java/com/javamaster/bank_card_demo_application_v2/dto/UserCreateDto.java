@@ -35,10 +35,9 @@ public class UserCreateDto {
     private String patronymic;
 
     @Schema(description = "Phone number")
-    @Min(1)
-    @Max(999999999)
-    @NotNull(message = "Phone number must be specified")
-    private Integer phoneNumber;
+    @Size(min = 1, max = 255)
+    @NotBlank(message = "Phone number must be specified")
+    private String phoneNumber;
 
     @Schema(description = "E-mail")
     @Email(message = "E-mail wrong format")

@@ -18,7 +18,7 @@ public class UserDto {
     private String name;
     private String surname;
     private String patronymic;
-    private Integer phoneNumber;
+    private String phoneNumber;
     private String email;
     private CardType status;
 

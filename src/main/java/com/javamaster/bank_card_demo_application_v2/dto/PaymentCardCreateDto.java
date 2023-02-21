@@ -20,10 +20,9 @@ import lombok.NoArgsConstructor;
 public class PaymentCardCreateDto {
 
     @Schema(description = "Card number")
-    @Min(1)
-    @Max(999999999)
+    @Size(min = 1, max = 255)
     @NotNull(message = "Card number must be specified")
-    private Integer cardNumber;
+    private String cardNumber;
 
     @NotNull
     private CardType cardType;

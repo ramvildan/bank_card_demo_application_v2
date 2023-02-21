@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class PaymentCardDto {
 
     private Integer id;
-    private Integer cardNumber;
+    private String cardNumber;
     private CardType cardType;
     private CurrencyType currencyType;
 }
