@@ -14,6 +14,7 @@ public class PaymentCardConverter {
             return null;
         }
         return PaymentCardDto.builder()
+                .id(paymentCard.getId())
                 .cardNumber(paymentCard.getCardNumber())
                 .cardType(paymentCard.getCardType())
                 .currencyType(paymentCard.getCurrencyType())
