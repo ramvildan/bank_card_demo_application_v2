@@ -2,6 +2,8 @@ package com.javamaster.bank_card_demo_application_v2.controller;
 
 import com.javamaster.bank_card_demo_application_v2.dto.PaymentCardCreateDto;
 import com.javamaster.bank_card_demo_application_v2.dto.PaymentCardDto;
+import com.javamaster.bank_card_demo_application_v2.exception.BadRequestException;
+import com.javamaster.bank_card_demo_application_v2.repository.UserRepository;
 import com.javamaster.bank_card_demo_application_v2.service.PaymentCardService;
 import com.javamaster.bank_card_demo_application_v2.service.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -23,13 +25,19 @@ public class PaymentCardController {
 
     private final PaymentCardService paymentCardService;
 
+    private final UserRepository userRepository;
+
     private final UserService userService;
 
     @PostMapping("/{userId}")
     public PaymentCardDto createPaymentCard(@PathVariable Integer userId,
-                                            @RequestBody @Valid PaymentCardCreateDto paymentCardCreateDto) {
+                                            @RequestBody @Valid PaymentCardCreateDto paymentCardCreateDto) throws BadRequestException {
         log.info("createPaymentCard: userId = {}, createPaymentCardDto = {}", userId, paymentCardCreateDto);
-
+        if (userRepository.existsById(userId)) {
+            userService.deleteUser(userId);
+        } else {
+            throw  new BadRequestException(String.format("User with this Id (%s) does not exist", userId));
+        }
         return paymentCardService.createPaymentCard(userId, paymentCardCreateDto);
     }
 }

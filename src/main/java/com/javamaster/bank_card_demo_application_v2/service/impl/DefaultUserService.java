@@ -50,7 +50,9 @@ public class DefaultUserService implements UserService {
     @Override
     public PhoneNumberResponseDto getPageByStatusAndCurrencyType(CardType status, CurrencyType type, Pageable pageable) {
         Page<User> currentPage = userRepository.findAllByStatusAndCurrencyType(status, type, pageable);
+
         log.info("getPageByStatusAndCurrencyType: currentPage = {}", currentPage);
+
         return
                 PhoneNumberResponseDto.builder()
                 .phoneNumbers(currentPage.stream().map(User::getPhoneNumber).collect(Collectors.toList()))
@@ -58,11 +60,5 @@ public class DefaultUserService implements UserService {
                 .count(currentPage.getTotalPages())
                 .page(currentPage.getNumber())
                 .build();
-//                new PhoneNumberResponseDto(currentPage.stream()
-//                .map(User::getPhoneNumber)
-//                .collect(Collectors.toList()),
-//                currentPage.getSize(),
-//                currentPage.getTotalPages(),
-//                currentPage.getNumber());
     }
 }

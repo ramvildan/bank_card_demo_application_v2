@@ -5,6 +5,8 @@ import com.javamaster.bank_card_demo_application_v2.dto.UserCreateDto;
 import com.javamaster.bank_card_demo_application_v2.dto.UserDto;
 import com.javamaster.bank_card_demo_application_v2.entity.type.CardType;
 import com.javamaster.bank_card_demo_application_v2.entity.type.CurrencyType;
+import com.javamaster.bank_card_demo_application_v2.exception.BadRequestException;
+import com.javamaster.bank_card_demo_application_v2.repository.UserRepository;
 import com.javamaster.bank_card_demo_application_v2.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -32,6 +34,8 @@ public class UserController {
 
     private final UserService userService;
 
+    private final UserRepository userRepository;
+
     @PostMapping
     @Operation(summary = "Create new user")
     public UserDto createUser(@RequestBody @Valid UserCreateDto userCreateDto) {
@@ -42,9 +46,13 @@ public class UserController {
     @DeleteMapping("/{userId}")
     @Operation(summary = "Delete user by user Id")
     public void deleteUser(@Parameter(description = "User Id")
-                               @PathVariable Integer userId) {
+                               @PathVariable Integer userId) throws BadRequestException {
         log.info("deleteUser: userId = {}", userId);
-        userService.deleteUser(userId);
+        if (userRepository.existsById(userId)) {
+            userService.deleteUser(userId);
+        } else {
+            throw new BadRequestException(String.format("User with this Id (%s) does not exist", userId));
+        }
     }
 
 

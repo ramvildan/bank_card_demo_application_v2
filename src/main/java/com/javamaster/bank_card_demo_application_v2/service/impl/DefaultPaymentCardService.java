@@ -33,6 +33,7 @@ public class DefaultPaymentCardService implements PaymentCardService {
                 .build();
 
         User userWithStatus = userRepository.findUserById(userId);
+
         userWithStatus.setStatus(newPaymentCard.getCardType());
         userWithStatus.setCurrencyType(newPaymentCard.getCurrencyType());
         userRepository.save(userWithStatus);
