@@ -3,6 +3,7 @@ package com.javamaster.bank_card_demo_application_v2.controller;
 import com.javamaster.bank_card_demo_application_v2.dto.PaymentCardCreateDto;
 import com.javamaster.bank_card_demo_application_v2.dto.PaymentCardDto;
 import com.javamaster.bank_card_demo_application_v2.service.PaymentCardService;
+import com.javamaster.bank_card_demo_application_v2.service.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,10 +23,15 @@ public class PaymentCardController {
 
     private final PaymentCardService paymentCardService;
 
+    private final UserService userService;
+
     @PostMapping("/{userId}")
     public PaymentCardDto createPaymentCard(@PathVariable Integer userId,
                                             @RequestBody @Valid PaymentCardCreateDto paymentCardCreateDto) {
         log.info("createPaymentCard: userId = {}, createPaymentCardDto = {}", userId, paymentCardCreateDto);
+
+        userService.updateUserStatus(userId, paymentCardCreateDto);
+
         return paymentCardService.createPaymentCard(userId, paymentCardCreateDto);
     }
 }
