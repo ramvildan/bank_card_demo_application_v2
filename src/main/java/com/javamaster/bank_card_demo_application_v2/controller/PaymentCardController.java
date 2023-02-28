@@ -30,8 +30,6 @@ public class PaymentCardController {
                                             @RequestBody @Valid PaymentCardCreateDto paymentCardCreateDto) {
         log.info("createPaymentCard: userId = {}, createPaymentCardDto = {}", userId, paymentCardCreateDto);
 
-        userService.updateUserStatus(userId, paymentCardCreateDto);
-
         return paymentCardService.createPaymentCard(userId, paymentCardCreateDto);
     }
 }

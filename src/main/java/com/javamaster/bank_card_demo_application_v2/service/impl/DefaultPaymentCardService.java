@@ -32,8 +32,14 @@ public class DefaultPaymentCardService implements PaymentCardService {
                 .userId(userId)
                 .build();
 
-        return paymentCardConverter.fromPaymentCardToPaymentCardDto(
+        PaymentCardDto savedCard = paymentCardConverter.fromPaymentCardToPaymentCardDto(
                 paymentCardRepository.save(newPaymentCard)
         );
+
+        User userWithStatus = userRepository.findUserById(userId);
+        userWithStatus.setStatus(savedCard.getCardType());
+        userRepository.save(userWithStatus);
+
+        return savedCard;
     }
 }
