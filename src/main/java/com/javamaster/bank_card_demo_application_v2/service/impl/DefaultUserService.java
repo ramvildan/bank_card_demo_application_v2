@@ -16,6 +16,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,6 +38,7 @@ public class DefaultUserService implements UserService {
                 .patronymic(userCreateDto.getPatronymic())
                 .phoneNumber(userCreateDto.getPhoneNumber())
                 .email(userCreateDto.getEmail())
+                .createdAt(new Date())
                 .build();
 
         return userConverter.fromUserToUserDto(
@@ -43,8 +46,13 @@ public class DefaultUserService implements UserService {
     }
 
     @Override
-    public void deleteUser(Integer userId) {
-        userRepository.findUserById(userId).setDeleted(true);
+    public UserDto deleteUser(Integer userId) {
+
+        User deletedUser = userRepository.findUserById(userId);
+        deletedUser.setDeleted(true);
+        deletedUser.setUpdatedAt(new Date());
+
+        return userConverter.fromUserToUserDto(userRepository.save(deletedUser));
     }
 
     @Override

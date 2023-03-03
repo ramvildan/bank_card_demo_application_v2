@@ -15,8 +15,15 @@ import lombok.NoArgsConstructor;
 @Schema(description = "Payment card information")
 public class PaymentCardDto {
 
+    @Schema(description = "Payment card ID")
     private Integer id;
+
+    @Schema(description = "Payment card number")
     private String cardNumber;
+
+    @Schema(description = "Payment card type")
     private CardType cardType;
+
+    @Schema(description = "Currency type")
     private CurrencyType currencyType;
 }

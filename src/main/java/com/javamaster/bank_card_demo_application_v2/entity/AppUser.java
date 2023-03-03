@@ -13,7 +13,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "appUser_table")
+@Table(name = "app_user_table")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,15 +24,17 @@ public class AppUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "Name", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "Surname", nullable = false)
+    @Column(name = "surname", nullable = false)
     private String surname;
 
-    @Column(name = "E-mail", nullable = false)
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "Role", nullable = false)
+    private String password;
+
+    @Column(name = "role", nullable = false)
     private Role role;
 }

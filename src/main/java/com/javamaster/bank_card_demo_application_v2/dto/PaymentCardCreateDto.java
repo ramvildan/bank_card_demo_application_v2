@@ -24,9 +24,11 @@ public class PaymentCardCreateDto {
     @NotNull(message = "Card number must be specified")
     private String cardNumber;
 
+    @Schema(description = "Payment card type")
     @NotNull
     private CardType cardType;
 
+    @Schema(description = "Currency type")
     @NotNull
     private CurrencyType currencyType;
 }

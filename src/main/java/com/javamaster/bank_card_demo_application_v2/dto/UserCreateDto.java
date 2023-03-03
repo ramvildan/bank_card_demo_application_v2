@@ -16,27 +16,27 @@ import lombok.NoArgsConstructor;
 @Schema(description = "Create user Dto")
 public class UserCreateDto {
 
-    @Schema(description = "Name")
+    @Schema(description = "User name")
     @Size(min = 1, max = 255)
     @NotBlank(message = "Name must be specified")
     private String name;
 
-    @Schema(description = "Surname")
+    @Schema(description = "User surname")
     @Size(min = 1, max = 255)
     @NotBlank(message = "Surname must be specified")
     private String surname;
 
-    @Schema(description = "Patronymic")
+    @Schema(description = "User patronymic")
     @Size(min = 1, max = 255)
     @NotBlank(message = "Patronymic must be specified")
     private String patronymic;
 
-    @Schema(description = "Phone number")
+    @Schema(description = "User phone number")
     @Size(min = 1, max = 255)
     @NotBlank(message = "Phone number must be specified")
     private String phoneNumber;
 
-    @Schema(description = "E-mail")
+    @Schema(description = "User email")
     @Email(message = "E-mail wrong format")
     @Size(min = 1, max = 255)
     private String email;

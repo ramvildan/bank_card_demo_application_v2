@@ -27,31 +27,34 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "Name", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "Surname", nullable = false)
+    @Column(name = "surname", nullable = false)
     private String surname;
 
-    @Column(name = "Patronymic", nullable = false)
+    @Column(name = "patronymic", nullable = false)
     private String patronymic;
 
-    @Column(name = "Phone_number", nullable = false)
+    @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 
-    @Column(name = "E-mail", nullable = false)
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "Status")
+    @Column(name = "status")
     private CardType status;
 
-    @Column(name = "Currency_type")
+    @Column(name = "currency_type")
     private CurrencyType currencyType;
 
+    @Column(name = "created_at")
     private Date createdAt;
 
+    @Column(name = "updated_at")
     private Date updatedAt;
 
+    @Column(name = "is_deleted")
     private boolean isDeleted;
 
 }

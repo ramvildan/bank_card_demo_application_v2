@@ -39,9 +39,12 @@ public class PaymentCard {
     @Column(name = "user_id", nullable = false)
     private Integer userId;
 
+    @Column(name = "created_at")
     private Date createdAt;
 
+    @Column(name = "updated_at")
     private Date updatedAt;
 
+    @Column(name = "is_deleted")
     private boolean isDeleted;
 }

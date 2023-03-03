@@ -14,7 +14,7 @@ public interface UserService {
 
     UserDto createUser(@Valid UserCreateDto userCreateDto);
 
-    void deleteUser(Integer userId);
+    UserDto deleteUser(Integer userId);
 
     PhoneNumberResponseDto getPageByStatusAndCurrencyType(CardType status, CurrencyType type, Pageable pageable);
 

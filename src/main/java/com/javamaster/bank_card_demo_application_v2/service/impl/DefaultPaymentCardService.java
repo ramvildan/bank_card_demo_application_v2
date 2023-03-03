@@ -12,6 +12,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 @RequiredArgsConstructor
 public class DefaultPaymentCardService implements PaymentCardService {
@@ -29,6 +31,7 @@ public class DefaultPaymentCardService implements PaymentCardService {
                 .cardNumber(paymentCardCreateDto.getCardNumber())
                 .cardType(paymentCardCreateDto.getCardType())
                 .currencyType(paymentCardCreateDto.getCurrencyType())
+                .createdAt(new Date())
                 .userId(userId)
                 .build();
 
@@ -36,6 +39,7 @@ public class DefaultPaymentCardService implements PaymentCardService {
 
         userWithStatus.setStatus(newPaymentCard.getCardType());
         userWithStatus.setCurrencyType(newPaymentCard.getCurrencyType());
+        userWithStatus.setUpdatedAt(new Date());
         userRepository.save(userWithStatus);
 
         return paymentCardConverter.fromPaymentCardToPaymentCardDto(
