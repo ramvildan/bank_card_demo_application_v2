@@ -4,6 +4,8 @@ import com.javamaster.bank_card_demo_application_v2.entity.type.CardType;
 import com.javamaster.bank_card_demo_application_v2.entity.type.CurrencyType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -43,9 +45,11 @@ public class User {
     private String email;
 
     @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private CardType status;
 
     @Column(name = "currency_type")
+    @Enumerated(EnumType.STRING)
     private CurrencyType currencyType;
 
     @Column(name = "created_at")

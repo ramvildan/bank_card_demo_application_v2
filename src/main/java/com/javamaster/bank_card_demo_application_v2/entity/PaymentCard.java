@@ -3,7 +3,10 @@ package com.javamaster.bank_card_demo_application_v2.entity;
 import com.javamaster.bank_card_demo_application_v2.entity.type.CardType;
 import com.javamaster.bank_card_demo_application_v2.entity.type.CurrencyType;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -31,9 +34,11 @@ public class PaymentCard {
     private String cardNumber;
 
     @Column(name = "currency_type", nullable = false)
+    @Enumerated(EnumType.STRING)
     private CurrencyType currencyType;
 
     @Column(name = "card_type", nullable = false)
+    @Enumerated(EnumType.STRING)
     private CardType cardType;
 
     @Column(name = "user_id", nullable = false)
