@@ -3,6 +3,7 @@ package com.javamaster.bank_card_demo_application_v2.controller;
 import com.javamaster.bank_card_demo_application_v2.dto.PaymentCardCreateDto;
 import com.javamaster.bank_card_demo_application_v2.dto.PaymentCardDto;
 import com.javamaster.bank_card_demo_application_v2.exception.BadRequestException;
+import com.javamaster.bank_card_demo_application_v2.exception.UserNotFoundException;
 import com.javamaster.bank_card_demo_application_v2.repository.UserRepository;
 import com.javamaster.bank_card_demo_application_v2.service.PaymentCardService;
 import com.javamaster.bank_card_demo_application_v2.service.UserService;
@@ -10,6 +11,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,17 +30,17 @@ public class PaymentCardController {
 
     private final UserRepository userRepository;
 
-    private final UserService userService;
-
     @PostMapping("/{userId}")
-    public PaymentCardDto createPaymentCard(@PathVariable Integer userId,
-                                            @RequestBody @Valid PaymentCardCreateDto paymentCardCreateDto) throws BadRequestException {
+    public ResponseEntity<PaymentCardDto> createPaymentCard(@PathVariable Integer userId,
+                                                            @RequestBody @Valid PaymentCardCreateDto paymentCardCreateDto) {
         log.info("createPaymentCard: userId = {}, createPaymentCardDto = {}", userId, paymentCardCreateDto);
+
         if (userRepository.existsById(userId)) {
-            userService.deleteUser(userId);
+            return ResponseEntity
+                    .status(HttpStatus.CREATED)
+                    .body(paymentCardService.createPaymentCard(userId, paymentCardCreateDto));
         } else {
-            throw  new BadRequestException(String.format("User with this Id (%s) does not exist", userId));
+            throw new UserNotFoundException(userId);
         }
-        return paymentCardService.createPaymentCard(userId, paymentCardCreateDto);
     }
 }
