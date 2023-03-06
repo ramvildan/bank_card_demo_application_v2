@@ -2,11 +2,7 @@ package com.javamaster.bank_card_demo_application_v2.controller;
 
 import com.javamaster.bank_card_demo_application_v2.dto.PaymentCardCreateDto;
 import com.javamaster.bank_card_demo_application_v2.dto.PaymentCardDto;
-import com.javamaster.bank_card_demo_application_v2.exception.BadRequestException;
-import com.javamaster.bank_card_demo_application_v2.exception.UserNotFoundException;
-import com.javamaster.bank_card_demo_application_v2.repository.UserRepository;
 import com.javamaster.bank_card_demo_application_v2.service.PaymentCardService;
-import com.javamaster.bank_card_demo_application_v2.service.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -28,19 +24,13 @@ public class PaymentCardController {
 
     private final PaymentCardService paymentCardService;
 
-    private final UserRepository userRepository;
-
     @PostMapping("/{userId}")
     public ResponseEntity<PaymentCardDto> createPaymentCard(@PathVariable Integer userId,
                                                             @RequestBody @Valid PaymentCardCreateDto paymentCardCreateDto) {
         log.info("createPaymentCard: userId = {}, createPaymentCardDto = {}", userId, paymentCardCreateDto);
 
-        if (userRepository.existsById(userId)) {
             return ResponseEntity
                     .status(HttpStatus.CREATED)
                     .body(paymentCardService.createPaymentCard(userId, paymentCardCreateDto));
-        } else {
-            throw new UserNotFoundException(userId);
-        }
     }
 }

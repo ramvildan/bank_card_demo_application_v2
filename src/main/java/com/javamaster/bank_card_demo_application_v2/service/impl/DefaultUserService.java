@@ -7,6 +7,7 @@ import com.javamaster.bank_card_demo_application_v2.dto.UserDto;
 import com.javamaster.bank_card_demo_application_v2.entity.User;
 import com.javamaster.bank_card_demo_application_v2.entity.type.CardType;
 import com.javamaster.bank_card_demo_application_v2.entity.type.CurrencyType;
+import com.javamaster.bank_card_demo_application_v2.exception.UserNotFoundException;
 import com.javamaster.bank_card_demo_application_v2.repository.UserRepository;
 import com.javamaster.bank_card_demo_application_v2.service.UserService;
 import jakarta.validation.Valid;
@@ -17,7 +18,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,6 +39,7 @@ public class DefaultUserService implements UserService {
                 .phoneNumber(userCreateDto.getPhoneNumber())
                 .email(userCreateDto.getEmail())
                 .createdAt(new Date())
+                .updatedAt(new Date())
                 .build();
 
         return userConverter.fromUserToUserDto(
@@ -48,7 +49,9 @@ public class DefaultUserService implements UserService {
     @Override
     public UserDto deleteUser(Integer userId) {
 
-        User deletedUser = userRepository.findUserById(userId);
+        User deletedUser = userRepository
+                .findById(userId)
+                .orElseThrow(()-> new UserNotFoundException(userId));
         deletedUser.setDeleted(true);
         deletedUser.setUpdatedAt(new Date());
 
@@ -57,7 +60,7 @@ public class DefaultUserService implements UserService {
 
     @Override
     public PhoneNumberResponseDto getPageByStatusAndCurrencyType(CardType status, CurrencyType type, Pageable pageable) {
-        Page<User> currentPage = userRepository.findAllByStatusAndCurrencyType(status, type, pageable);
+        Page<User> currentPage = userRepository.findAllByStatusAndCurrencyTypeAndDeletedIsFalse(status, type, pageable);
 
         log.info("getPageByStatusAndCurrencyType: currentPage = {}", currentPage);
 

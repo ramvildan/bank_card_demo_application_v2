@@ -3,7 +3,6 @@ package com.javamaster.bank_card_demo_application_v2.entity;
 import com.javamaster.bank_card_demo_application_v2.entity.type.CardType;
 import com.javamaster.bank_card_demo_application_v2.entity.type.CurrencyType;
 import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;

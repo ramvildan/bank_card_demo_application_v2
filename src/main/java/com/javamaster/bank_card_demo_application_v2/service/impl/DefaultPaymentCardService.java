@@ -33,10 +33,13 @@ public class DefaultPaymentCardService implements PaymentCardService {
                 .cardType(paymentCardCreateDto.getCardType())
                 .currencyType(paymentCardCreateDto.getCurrencyType())
                 .createdAt(new Date())
+                .updatedAt(new Date())
                 .userId(userId)
                 .build();
 
-        User userWithStatus = userRepository.findUserById(userId);
+        User userWithStatus = userRepository
+                .findById(userId)
+                .orElseThrow(()-> new UserNotFoundException(userId));
 
         userWithStatus.setStatus(newPaymentCard.getCardType());
         userWithStatus.setCurrencyType(newPaymentCard.getCurrencyType());
