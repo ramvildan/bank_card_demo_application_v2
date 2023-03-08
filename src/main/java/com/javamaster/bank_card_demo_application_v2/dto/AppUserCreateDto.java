@@ -16,6 +16,11 @@ import lombok.NoArgsConstructor;
 @Schema(description = "Create app user Dto")
 public class AppUserCreateDto {
 
+    @Schema(description = "AppUser login")
+    @Size(min = 1, max = 255)
+    @NotBlank(message = "Login must be specified")
+    private String login;
+
     @Schema(description = "AppUser name")
     @Size(min = 1, max = 255)
     @NotBlank(message = "Name must be specified")

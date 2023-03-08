@@ -17,6 +17,9 @@ public class AppUserDto {
     @Schema(description = "AppUser ID")
     private Integer id;
 
+    @Schema(description = "AppUser login")
+    private String login;
+
     @Schema(description = "AppUser name")
     private String name;
 

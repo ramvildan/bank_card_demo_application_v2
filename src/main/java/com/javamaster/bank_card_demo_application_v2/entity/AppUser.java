@@ -28,6 +28,10 @@ public class AppUser {
     private Integer id;
 
     @NotEmpty
+    @Column(name = "login", nullable = false)
+    private String login;
+
+    @NotEmpty
     @Column(name = "name", nullable = false)
     private String name;
 
