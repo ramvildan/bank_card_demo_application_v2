@@ -15,6 +15,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,6 +34,7 @@ public class UserController {
 
     private final UserService userService;
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping
     @Operation(summary = "Create new user")
     public UserDto createUser(@RequestBody
@@ -43,6 +45,7 @@ public class UserController {
         return userService.createUser(userCreateDto);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @DeleteMapping("/{userId}")
     @Operation(summary = "Delete user by user Id")
     public void deleteUser(@Parameter(description = "User Id")
@@ -53,6 +56,7 @@ public class UserController {
             userService.deleteUser(userId);
     }
 
+    @PreAuthorize("hasAnyAuthority('MANAGER', 'ADMIN')")
     @GetMapping
     @Operation(summary = "Get phone numbers")
     public PhoneNumberResponseDto getPageByStatusAndCurrencyType(@RequestParam @NotNull CardType status,

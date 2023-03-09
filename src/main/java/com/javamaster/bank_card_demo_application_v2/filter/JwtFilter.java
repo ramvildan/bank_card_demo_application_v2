@@ -1,6 +1,7 @@
 package com.javamaster.bank_card_demo_application_v2.filter;
 
 import com.javamaster.bank_card_demo_application_v2.domain.JwtAuthentication;
+import com.javamaster.bank_card_demo_application_v2.service.JwtUtils;
 import com.javamaster.bank_card_demo_application_v2.service.impl.JwtProvider;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
@@ -30,7 +31,7 @@ public class JwtFilter extends GenericFilterBean {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
             throws IOException, ServletException {
 
-        final String token = getTokenFromRequest((HttpServletRequest) request);
+        final String token = getTokenFromRequest((HttpServletRequest) servletRequest);
 
         if (token != null && jwtProvider.validateAccessToken(token)) {
 
