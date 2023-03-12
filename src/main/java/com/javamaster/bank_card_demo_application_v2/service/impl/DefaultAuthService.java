@@ -4,6 +4,7 @@ import com.javamaster.bank_card_demo_application_v2.domain.JwtRequest;
 import com.javamaster.bank_card_demo_application_v2.domain.JwtResponse;
 import com.javamaster.bank_card_demo_application_v2.entity.AppUser;
 import com.javamaster.bank_card_demo_application_v2.service.AppUserService;
+import com.javamaster.bank_card_demo_application_v2.service.AuthService;
 import io.jsonwebtoken.Claims;
 import jakarta.security.auth.message.AuthException;
 import jakarta.validation.constraints.NotNull;
@@ -15,7 +16,7 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
-public class AuthService {
+public class DefaultAuthService implements AuthService {
 
     private final AppUserService appUserService;
 
@@ -23,11 +24,12 @@ public class AuthService {
 
     private final JwtProvider jwtProvider;
 
-    public JwtResponse login(@NotNull JwtRequest authRequest) throws AuthException {
+    @Override
+    public JwtResponse login(@NotNull JwtRequest loginRequest) throws AuthException {
 
-        final AppUser appUser = appUserService.getByLogin(authRequest.getLogin())
+        final AppUser appUser = appUserService.getByLogin(loginRequest.getLogin())
                 .orElseThrow(()-> new AuthException("AppUser not found"));
-        if (appUser.getPassword().equals(authRequest.getPassword())) {
+        if (appUser.getPassword().equals(loginRequest.getPassword())) {
 
             final String accessToken = jwtProvider.generateAccessToken(appUser);
             final String refreshToken = jwtProvider.generateRefreshToken(appUser);
@@ -39,6 +41,7 @@ public class AuthService {
         }
     }
 
+    @Override
     public JwtResponse getAccessToken(@NotNull String refreshToken) throws AuthException {
 
         if (jwtProvider.validateRefreshToken(refreshToken)) {
@@ -59,6 +62,7 @@ public class AuthService {
         return new JwtResponse(null, null);
     }
 
+    @Override
     public JwtResponse getRefreshToken(@NotNull String refreshToken) throws AuthException {
 
         if (jwtProvider.validateRefreshToken(refreshToken)) {
