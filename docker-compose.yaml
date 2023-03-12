@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+    container_name: bankcard
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURSE_URL=jdbc:postgresql://db:5433/bankcard
+      - SPRING_DATASOURSE_USERNAME=admin
+      - SPRING_DATASOURSE_PASSWORD=admin
+    ports:
+      - '8080:8080'
+
+  db:
+    image: postgres:15.1-alpine
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=bankcard
