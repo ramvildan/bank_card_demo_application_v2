@@ -8,16 +8,18 @@ services:
     depends_on:
       - db
     environment:
-      - SPRING_DATASOURSE_URL=jdbc:postgresql://db:5433/bankcard
-      - SPRING_DATASOURSE_USERNAME=admin
-      - SPRING_DATASOURSE_PASSWORD=admin
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5433/bankcard?currentSchema=bankcard
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=admin
     ports:
       - '8080:8080'
 
   db:
-    image: postgres:15.1-alpine
+    image: postgres:13.3
     container_name: postgres
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin
       - POSTGRES_DB=bankcard
+    volumes:
+      - ./src/main/resources/db-init:/docker-entrypoint-initdb.d
