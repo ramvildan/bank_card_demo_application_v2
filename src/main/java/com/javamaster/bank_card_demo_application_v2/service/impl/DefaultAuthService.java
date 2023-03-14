@@ -9,6 +9,7 @@ import io.jsonwebtoken.Claims;
 import jakarta.security.auth.message.AuthException;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -24,12 +25,14 @@ public class DefaultAuthService implements AuthService {
 
     private final JwtProvider jwtProvider;
 
+    private final PasswordEncoder passwordEncoder;
+
     @Override
     public JwtResponse login(@NotNull JwtRequest loginRequest) throws AuthException {
 
         final AppUser appUser = appUserService.getByLogin(loginRequest.getLogin())
                 .orElseThrow(()-> new AuthException("AppUser not found"));
-        if (appUser.getPassword().equals(loginRequest.getPassword())) {
+        if (appUser.getPassword().matches(passwordEncoder.encode(loginRequest.getPassword()))) {
 
             final String accessToken = jwtProvider.generateAccessToken(appUser);
             final String refreshToken = jwtProvider.generateRefreshToken(appUser);

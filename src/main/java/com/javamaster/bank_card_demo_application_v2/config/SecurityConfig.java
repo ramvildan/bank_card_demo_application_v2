@@ -56,7 +56,7 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests(
                         authz -> authz
-                                .requestMatchers("/api/auth/login", "/api/auth/token").permitAll()
+                                .requestMatchers("/api/auth/login", "/api/auth/token", "/api/auth/register").permitAll()
 //                              Swagger needs these requestMatchers ->
                                 .requestMatchers("/swagger-ui/**").permitAll()
                                 .requestMatchers("/v3/api-docs/**").permitAll()

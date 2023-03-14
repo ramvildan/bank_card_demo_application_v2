@@ -6,6 +6,7 @@ import com.javamaster.bank_card_demo_application_v2.dto.AppUserDto;
 import com.javamaster.bank_card_demo_application_v2.entity.AppUser;
 import com.javamaster.bank_card_demo_application_v2.repository.AppUserRepository;
 import com.javamaster.bank_card_demo_application_v2.service.AppUserService;
+import jakarta.annotation.PostConstruct;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,6 +27,11 @@ public class DefaultAppUserService implements AppUserService {
 
     private final PasswordEncoder passwordEncoder;
 
+    @PostConstruct
+    public void initCache() {
+        appUsers.addAll(appUserRepository.findAll());
+    }
+
     @Override
     public AppUserDto createAppUser(@Valid AppUserCreateDto appUserCreateDto) {
 
@@ -37,6 +43,8 @@ public class DefaultAppUserService implements AppUserService {
                 .password(passwordEncoder.encode(appUserCreateDto.getPassword()))
                 .role(appUserCreateDto.getRole())
                 .build();
+
+        appUsers.add(appUser);
 
         return appUserConverter.fromAppUserToAppUserDto(
                 appUserRepository.save(appUser));

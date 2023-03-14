@@ -14,5 +14,5 @@ public interface AppUserService {
 
     AppUserDto createAppUser(@Valid AppUserCreateDto appUserCreateDto);
 
-    public Optional<AppUser> getByLogin(@NotNull String login);
+    Optional<AppUser> getByLogin(@NotNull String login);
 }
