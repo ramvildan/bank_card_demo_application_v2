@@ -32,7 +32,7 @@ public class DefaultAuthService implements AuthService {
 
         final AppUser appUser = appUserService.getByLogin(loginRequest.getLogin())
                 .orElseThrow(()-> new AuthException("AppUser not found"));
-        if (appUser.getPassword().matches(passwordEncoder.encode(loginRequest.getPassword()))) {
+        if (passwordEncoder.matches(loginRequest.getPassword(), appUser.getPassword())) {
 
             final String accessToken = jwtProvider.generateAccessToken(appUser);
             final String refreshToken = jwtProvider.generateRefreshToken(appUser);

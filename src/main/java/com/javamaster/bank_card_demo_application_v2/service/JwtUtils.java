@@ -25,7 +25,7 @@ public final class JwtUtils {
 
     private static Set<Role> getRoles(Claims claims) {
 
-        final List<String> roles = claims.get("Roles", List.class);
+        final List<String> roles = List.of(claims.get("roles", String.class));
 
         return roles.stream()
                 .map(Role::valueOf)
