@@ -38,9 +38,9 @@ public class JwtProvider {
 
     public String generateAccessToken(@NotNull AppUser appUser) {
 
-        final LocalDateTime now = LocalDateTime.now();
-        final Instant accessExpirationInstant = now.plusMinutes(5).atZone(ZoneId.systemDefault()).toInstant();
-        final Date accessExpiration = Date.from(accessExpirationInstant);
+        LocalDateTime now = LocalDateTime.now();
+        Instant accessExpirationInstant = now.plusMinutes(5).atZone(ZoneId.systemDefault()).toInstant();
+        Date accessExpiration = Date.from(accessExpirationInstant);
 
         return Jwts.builder()
                 .setSubject(appUser.getLogin())
@@ -54,9 +54,9 @@ public class JwtProvider {
 
     public String generateRefreshToken(@NotNull AppUser appUser) {
 
-        final LocalDateTime now = LocalDateTime.now();
-        final Instant refreshExpirationInstant = now.plusDays(30).atZone(ZoneId.systemDefault()).toInstant();
-        final Date refreshExpiration = Date.from(refreshExpirationInstant);
+        LocalDateTime now = LocalDateTime.now();
+        Instant refreshExpirationInstant = now.plusDays(30).atZone(ZoneId.systemDefault()).toInstant();
+        Date refreshExpiration = Date.from(refreshExpirationInstant);
 
         return Jwts.builder()
                 .setSubject(appUser.getLogin())

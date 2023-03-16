@@ -6,6 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PaymentCardRepository extends JpaRepository<PaymentCard, Integer> {
-
-    PaymentCard findPaymentCardByUserId(Integer userId);
 }

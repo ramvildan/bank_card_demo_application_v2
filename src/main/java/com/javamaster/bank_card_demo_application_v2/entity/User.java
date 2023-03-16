@@ -59,7 +59,7 @@ public class User {
     private Date updatedAt;
 
     @Column(name = "is_deleted")
-    private boolean isDeleted;
+    private Boolean isDeleted = false;
 
 }
 

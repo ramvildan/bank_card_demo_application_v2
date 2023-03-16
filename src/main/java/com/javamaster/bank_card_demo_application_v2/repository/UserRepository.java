@@ -10,6 +10,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
-
-    Page<User> findAllByStatusAndCurrencyTypeAndDeletedIsFalse(CardType status, CurrencyType currencyType, Pageable pageable);
+    Page<User> findAllByStatusAndCurrencyTypeAndIsDeletedIsFalse(CardType status, CurrencyType currencyType, Pageable pageable);
 }

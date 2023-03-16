@@ -15,7 +15,7 @@ public final class JwtUtils {
 
     public static JwtAuthentication generate(Claims claims) {
 
-        final JwtAuthentication jwtInfoToken = new JwtAuthentication();
+        JwtAuthentication jwtInfoToken = new JwtAuthentication();
         jwtInfoToken.setRoles(getRoles(claims));
         jwtInfoToken.setName(claims.get("Name", String.class));
         jwtInfoToken.setUsername(claims.getSubject());
@@ -25,7 +25,7 @@ public final class JwtUtils {
 
     private static Set<Role> getRoles(Claims claims) {
 
-        final List<String> roles = List.of(claims.get("roles", String.class));
+        List<String> roles = List.of(claims.get("roles", String.class));
 
         return roles.stream()
                 .map(Role::valueOf)

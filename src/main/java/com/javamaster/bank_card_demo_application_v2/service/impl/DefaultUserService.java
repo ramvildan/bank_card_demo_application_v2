@@ -52,7 +52,7 @@ public class DefaultUserService implements UserService {
         User deletedUser = userRepository
                 .findById(userId)
                 .orElseThrow(()-> new UserNotFoundException(userId));
-        deletedUser.setDeleted(true);
+        deletedUser.setIsDeleted(true);
         deletedUser.setUpdatedAt(new Date());
 
         return userConverter.fromUserToUserDto(userRepository.save(deletedUser));
@@ -60,7 +60,7 @@ public class DefaultUserService implements UserService {
 
     @Override
     public PhoneNumberResponseDto getPageByStatusAndCurrencyType(CardType status, CurrencyType type, Pageable pageable) {
-        Page<User> currentPage = userRepository.findAllByStatusAndCurrencyTypeAndDeletedIsFalse(status, type, pageable);
+        Page<User> currentPage = userRepository.findAllByStatusAndCurrencyTypeAndIsDeletedIsFalse(status, type, pageable);
 
         log.info("getPageByStatusAndCurrencyType: currentPage = {}", currentPage);
 

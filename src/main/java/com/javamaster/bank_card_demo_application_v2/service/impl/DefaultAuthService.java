@@ -30,12 +30,12 @@ public class DefaultAuthService implements AuthService {
     @Override
     public JwtResponse login(@NotNull JwtRequest loginRequest) throws AuthException {
 
-        final AppUser appUser = appUserService.getByLogin(loginRequest.getLogin())
+        AppUser appUser = appUserService.getByLogin(loginRequest.getLogin())
                 .orElseThrow(()-> new AuthException("AppUser not found"));
         if (passwordEncoder.matches(loginRequest.getPassword(), appUser.getPassword())) {
 
-            final String accessToken = jwtProvider.generateAccessToken(appUser);
-            final String refreshToken = jwtProvider.generateRefreshToken(appUser);
+            String accessToken = jwtProvider.generateAccessToken(appUser);
+            String refreshToken = jwtProvider.generateRefreshToken(appUser);
             refreshStorage.put(appUser.getLogin(), refreshToken);
 
             return new JwtResponse(accessToken, refreshToken);
@@ -49,15 +49,15 @@ public class DefaultAuthService implements AuthService {
 
         if (jwtProvider.validateRefreshToken(refreshToken)) {
 
-            final Claims claims = jwtProvider.getRefreshClaims(refreshToken);
-            final String login = claims.getSubject();
-            final String saveRefreshToken = refreshStorage.get(login);
+            Claims claims = jwtProvider.getRefreshClaims(refreshToken);
+            String login = claims.getSubject();
+            String saveRefreshToken = refreshStorage.get(login);
 
             if (saveRefreshToken != null && saveRefreshToken.equals(refreshToken)) {
 
-                final AppUser appUser = appUserService.getByLogin(login)
+                AppUser appUser = appUserService.getByLogin(login)
                         .orElseThrow(()-> new AuthException("AppUser not found"));
-                final String accessToken = jwtProvider.generateAccessToken(appUser);
+                String accessToken = jwtProvider.generateAccessToken(appUser);
 
                 return new JwtResponse(accessToken, null);
             }
@@ -70,16 +70,16 @@ public class DefaultAuthService implements AuthService {
 
         if (jwtProvider.validateRefreshToken(refreshToken)) {
 
-            final Claims claims = jwtProvider.getRefreshClaims(refreshToken);
-            final String login = claims.getSubject();
-            final String saveRefreshToken = refreshStorage.get(login);
+            Claims claims = jwtProvider.getRefreshClaims(refreshToken);
+            String login = claims.getSubject();
+            String saveRefreshToken = refreshStorage.get(login);
 
             if (saveRefreshToken != null && saveRefreshToken.equals(refreshToken)) {
 
-                final AppUser appUser = appUserService.getByLogin(login)
+                AppUser appUser = appUserService.getByLogin(login)
                         .orElseThrow(()-> new AuthException("AppUser not found"));
-                final String accessToken = jwtProvider.generateAccessToken(appUser);
-                final String newRefreshToken = jwtProvider.generateRefreshToken(appUser);
+                String accessToken = jwtProvider.generateAccessToken(appUser);
+                String newRefreshToken = jwtProvider.generateRefreshToken(appUser);
                 refreshStorage.put(appUser.getLogin(), newRefreshToken);
 
                 return new JwtResponse(accessToken, newRefreshToken);
